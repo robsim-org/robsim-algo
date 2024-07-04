@@ -14,24 +14,29 @@ TARGET := bin/$(PROGRAM).dll
 # Platform-specific modifications
 ifeq ($(OS),Windows_NT)
     RM = del /Q
+    RMDIR = rmdir /S /Q
     FixPath = $(subst /,\,$1)
     MKDIR_P = mkdir
 else
     RM = rm -f
+    RMDIR = rm -rf
     FixPath = $1
     MKDIR_P = mkdir -p
 endif
 
 # Default make
-all: $(TARGET)
+all: clean setup $(TARGET)
 
 # Build the DLL
 $(TARGET): $(SOURCES)
-	$(MKDIR_P) bin
 	$(CXX) $(CXXFLAGS) -shared -o $@ $(SOURCES)
 
 # Clean up build files
 clean:
-	$(RM) $(call FixPath,bin/*)
+	$(RMDIR) bin
 
-.PHONY: all clean
+# Setup build directory
+setup:
+	$(MKDIR_P) bin
+
+.PHONY: all clean setup

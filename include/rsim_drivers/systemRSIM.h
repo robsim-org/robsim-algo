@@ -32,6 +32,13 @@ ReturnOption print(std::string message) {
     }
 }
 
+// This is just a function to debug the communication between the simulation and the plugin
+extern "C" {
+__declspec(dllexport) int returnNumberTimesTwo(int value) {
+    return value * 2;
+}
+}
+
 }  // namespace SystemRSIM
 
 #endif

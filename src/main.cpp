@@ -1,5 +1,7 @@
 #include "main.h"
 
+bool doOnce = true;
+
 void setup() {
     /*
     ################################
@@ -19,5 +21,8 @@ void loop(double deltaTime) {
     ||                            ||
     ################################
     */
-    auto result = SystemRSIM::print("LOOP: Hello, RSIM!");
+    if (doOnce) {
+        auto result = SystemRSIM::print("new");
+        doOnce = true;
+    }
 }
