@@ -11,7 +11,7 @@ typedef void (*CallbackType)(const char*);
 CallbackType printCallback = nullptr;
 
 // Function to register the callback
-extern "C" __declspec(dllexport) void RegisterPrintCallback(CallbackType cb) {
+extern "C" __declspec(dllexport) void registerPrintCallback(CallbackType cb) {
     printCallback = cb;
 }
 

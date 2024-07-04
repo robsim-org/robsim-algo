@@ -22,7 +22,7 @@ void loop(double deltaTime) {
     ################################
     */
     if (doOnce) {
-        auto result = SystemRSIM::print("new");
-        doOnce = true;
+        auto result = SystemRSIM::print("LOOP: Hello, RSIM!");
+        doOnce = false;
     }
 }
