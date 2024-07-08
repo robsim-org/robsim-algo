@@ -21,8 +21,6 @@ void loop(double deltaTime) {
     ||                            ||
     ################################
     */
-    if (doOnce) {
-        auto result = SystemRSIM::print("LOOP: Hello, RSIM!");
-        doOnce = false;
-    }
+    MotorDriver::setSpeedVal(0, 0.5);
+    MotorDriver::setSpeedVal(1, 0.5);
 }

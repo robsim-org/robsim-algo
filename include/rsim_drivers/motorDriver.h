@@ -32,6 +32,12 @@ ReturnOption setDirectionClockWise(int motorIndex);
  */
 ReturnOption setDirectionCounterClockWise(int motorIndex);
 
+typedef void (*CallbackType)(int, float);
+CallbackType setSpeedValCallback = nullptr;
+extern "C" __declspec(dllexport) void registerSetSpeedValCallback(CallbackType cb) {
+    setSpeedValCallback = cb;
+}
+
 /**
  * Receives the motor index and the target speed, a float between 0 and 1, and sets the motor to that speed
  *
@@ -40,7 +46,14 @@ ReturnOption setDirectionCounterClockWise(int motorIndex);
  *
  * @return ReturnOption with success or error message
  */
-ReturnOption setSpeedVal(int motorIndex, float speedVal);
+ReturnOption setSpeedVal(int motorIndex, float speedVal) {
+    if (setSpeedValCallback != nullptr) {
+        setSpeedValCallback(motorIndex, speedVal);
+        return ReturnOption(true);
+    } else {
+        return ReturnOption(false, "Callback not registered");
+    }
+}
 
 /**
  * Receives the motor index and enables the motor
