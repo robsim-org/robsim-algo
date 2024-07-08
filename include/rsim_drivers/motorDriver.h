@@ -60,6 +60,27 @@ ReturnOption enableMotor(int motorIndex);
  */
 ReturnOption disableMotor(int motorIndex);
 
+/**
+ * Gets the number of steps in the counter of the motor.
+ * With the counter and the number of steps per revolution, it is possible to calculate the current position of the motor.
+ *
+ * @param motorIndex The index of the motor
+ *
+ * @return ReturnOption with the number of steps or error message
+ */
+ReturnOptionT<int> getStepCounter(int motorIndex);
+
+/**
+ * Sets the number of steps in the counter of the motor.
+ * You can use this to reset the counter.
+ * This does not move the motor, it just changes the number of steps in the counter
+ *
+ * @param motorIndex The index of the motor
+ * @param newStepCounter The new number of steps in the counter
+ *
+ * @return ReturnOption with success or error message
+ */
+ReturnOption setStepCounter(int motorIndex, int newStepCounter);
 }  // namespace MotorDriver
 
 #endif
